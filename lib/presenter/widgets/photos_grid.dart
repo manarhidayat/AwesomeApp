@@ -1,4 +1,5 @@
 import 'package:awesome_app/domain/entities/photo.dart';
+import 'package:awesome_app/presenter/screens/detail_screen.dart';
 import 'package:awesome_app/presenter/widgets/tile_grid.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,8 +32,12 @@ class PhotosGridState extends State<PhotosGrid> {
       itemBuilder: (context, index){
         final photo = widget.photos[index];
         return index >= widget.photos.length
-                      ? BottomLoader()
-                      : TileGrid(photo);
+          ? BottomLoader()
+          : 
+          GestureDetector(
+            child: TileGrid(photo),
+            onTap: () => Navigator.pushNamed(context, DetailScreen.routeName, arguments: photo),
+        );
       },
       staggeredTileBuilder: (index) => StaggeredTile.fit(2),
     );
