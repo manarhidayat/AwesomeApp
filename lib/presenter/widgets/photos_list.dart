@@ -1,25 +1,35 @@
 import 'package:awesome_app/domain/entities/photo.dart';
+import 'package:awesome_app/presenter/widgets/tile_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class PhotosList extends StatelessWidget {
+import 'bottom_loader.dart';
 
-  final List<Photo> _photos;
+class PhotosList extends StatefulWidget {
 
-  PhotosList({
-    required List<Photo> photos
-  }): _photos = photos;
+  final List<Photo> photos;
+
+  PhotosList(this.photos);
+
+  @override
+  PhotosListState createState() => PhotosListState();
+}
+
+class PhotosListState extends State<PhotosList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
       itemBuilder: (context, index){
-        return Row(children: [
-          Text("tes"),
-          Text("tes")
-        ]);
+        final photo = widget.photos[index];
+        return index >= widget.photos.length
+                      ? BottomLoader()
+                      : TileList(photo);
       },
-      itemCount: 20,
+      separatorBuilder: (context, index) => Container(),
+      itemCount: widget.photos.length,
     );
   }
 } 

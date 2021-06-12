@@ -54,7 +54,7 @@ class MainScreenState extends State<MainScreen> {
               expandedHeight: 200,
               floating: false,
               pinned: true,
-              title: (innerBoxIsScrolled) ? Text("Awesome") : SizedBox.shrink(),
+              title: (innerBoxIsScrolled) ? Text("Awesome App") : Text("Awesome App"),
               flexibleSpace: FlexibleSpaceBar(
                 background: Image.asset(banner)
               ),
@@ -107,7 +107,7 @@ class MainScreenState extends State<MainScreen> {
                     return const Center(child: Text('No photo'));
                   }
                   final photos = state.list;
-                  return (_isGrid) ? PhotosGrid(photos) : PhotosList(photos: [],);
+                  return (_isGrid) ? PhotosGrid(photos) : PhotosList(photos);
                 default:
                   return const Center(child: CircularProgressIndicator());
               }
