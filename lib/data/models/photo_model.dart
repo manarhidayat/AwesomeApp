@@ -25,7 +25,7 @@ class PhotoModel {
   SrcModel src;
   bool liked;
 
-  factory PhotoModel.fromJson(Map<String, dynamic> json) => PhotoModel(
+  factory PhotoModel.fromJson(Map<dynamic, dynamic> json) => PhotoModel(
     id: json["id"] != null ? json["id"] : -1,
     width: json["width"] != null ? json["width"] : 0,
     height: json["height"] != null ? json["height"] : 0,
