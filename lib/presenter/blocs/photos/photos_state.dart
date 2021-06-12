@@ -1,26 +1,31 @@
-import 'package:awesome_app/domain/entities/photos_response.dart';
+import 'package:awesome_app/domain/entities/photo.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class PhotosState extends Equatable {
-  const PhotosState();
+enum PhotosStatus { initial, success, failure }
+
+class PhotosState extends Equatable {
+  const PhotosState({
+    this.status = PhotosStatus.initial,
+    this.list = const <Photo>[],
+    this.hasReachedMax = false,
+  });
+
+  final PhotosStatus status;
+  final List<Photo> list;
+  final bool hasReachedMax;
+
+  PhotosState copyWith({
+    required PhotosStatus status,
+    required List<Photo> list,
+    required bool hasReachedMax,
+  }) {
+    return PhotosState(
+      status: status,
+      list: list,
+      hasReachedMax: hasReachedMax,
+    );
+  }
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [status, list, hasReachedMax];
 }
-
-class PhotosLoadInProgress extends PhotosState {}
-
-class PhotosLoadSuccess extends PhotosState {
-  final PhotosResponse response;
-
-  const PhotosLoadSuccess(this.response);
-
-  @override
-  List<Object> get props => [response];
-}
-
-class PhotosEmpty extends PhotosState {}
-
-class PhotosLoadFailed extends PhotosState {}
-
-class PhotosUpdateFailed extends PhotosState {} 
