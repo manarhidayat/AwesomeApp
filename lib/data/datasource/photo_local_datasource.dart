@@ -24,7 +24,7 @@ class PhotoLocalDatasourceImpl implements PhotoLocalDatasource {
   }
 
   @override
-  Future<bool> savePhotos(List<Photo> photos) async {
+  Future<bool> savePhotos(List<Photo> photos) async { 
     final allPhoto = PhotoModelConverter.converts(photos);
     return await cache.savePhotos(allPhoto);
   }

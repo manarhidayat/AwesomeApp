@@ -26,7 +26,7 @@ class PhotosResponseModel {
   Map<String, dynamic> toJson() => {
     "page": page,
     "per_page": perPage,
-    "photos": (photos != null) ? List<dynamic>.from(photos.map((x) => x.toJson())) : null,
+    "photos": List<dynamic>.from(photos.map((x) => x.toJson())),
     "total_results": totalResults,
     "next_page": nextPage,
   };

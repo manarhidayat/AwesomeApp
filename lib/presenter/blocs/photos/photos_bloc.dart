@@ -33,6 +33,7 @@ class PhotosBloc extends Bloc<PhotosEvent, PhotosState> {
     if (state.hasReachedMax) yield state;
 
     if (state.status == PhotosStatus.initial) {
+      page = 1;
       final res = await _getPhotos(ParamsGetPhotos(page));
 
       yield res.fold(
