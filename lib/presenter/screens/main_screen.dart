@@ -20,7 +20,6 @@ class MainScreenState extends State<MainScreen> {
   static const String routeName = "/main";
 
   bool _isGrid = true;
-  int _page = 1;
   final _scrollController = ScrollController();
 
   late PhotosBloc _bloc;
@@ -34,10 +33,6 @@ class MainScreenState extends State<MainScreen> {
 
     _scrollController.addListener(() {
       if(_scrollController.position.pixels >= _scrollController.position.maxScrollExtent){
-        // setState(() {
-        //   _page++;
-        // });
-
         _bloc.add(PhotosFetched());
       }
     });
@@ -89,7 +84,7 @@ class MainScreenState extends State<MainScreen> {
           child: BlocConsumer<PhotosBloc, PhotosState>(
             listener: (context, state){
               if(state.status == PhotosStatus.failure){
-                Scaffold.of(context).showSnackBar(SnackBar(
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Text("Load photos failed"),
                   action: SnackBarAction(
                     label: "Retry",
